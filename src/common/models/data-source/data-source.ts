@@ -57,6 +57,7 @@ export type Introspection = 'none' | 'no-autofill' | 'autofill-dimensions-only' 
 export interface DataSourceValue {
   name: string;
   title?: string;
+  description?: string;
   engine: string;
   source: string;
   subsetFilter?: Expression;
@@ -86,6 +87,7 @@ export interface DataSourceValue {
 export interface DataSourceJS {
   name: string;
   title?: string;
+  description?: string;
   engine: string;
   source: string;
   subsetFilter?: ExpressionJS;
@@ -294,6 +296,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
       executor: null,
       name: parameters.name,
       title: parameters.title,
+      description: parameters.description,
       engine,
       source: parameters.source,
       subsetFilter,
@@ -326,6 +329,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
 
   public name: string;
   public title: string;
+  public description: string;
   public engine: string;
   public source: string;
   public subsetFilter: Expression;
@@ -357,6 +361,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
     this.name = name;
 
     this.title = parameters.title || makeTitle(name);
+    this.description = parameters.description || '';
     this.engine = parameters.engine || 'druid';
     this.source = parameters.source || name;
     this.subsetFilter = parameters.subsetFilter;
@@ -390,6 +395,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
     var value: DataSourceValue = {
       name: this.name,
       title: this.title,
+      description: this.description,
       engine: this.engine,
       source: this.source,
       subsetFilter: this.subsetFilter,
@@ -420,6 +426,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
     var js: DataSourceJS = {
       name: this.name,
       title: this.title,
+      description: this.description,
       engine: this.engine,
       source: this.source,
       subsetFilter: this.subsetFilter ? this.subsetFilter.toJS() : null,
@@ -462,6 +469,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
     return DataSource.isDataSource(other) &&
       this.name === other.name &&
       this.title === other.title &&
+      this.description === other.description &&
       this.engine === other.engine &&
       this.source === other.source &&
       immutableEqual(this.subsetFilter, other.subsetFilter) &&
@@ -645,6 +653,7 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
   }
 
   public isQueryable(): boolean {
+    console.log(this.executor);
     return Boolean(this.executor);
   }
 
@@ -885,6 +894,10 @@ export class DataSource implements Instance<DataSourceValue, DataSourceJS> {
 
   public changeTitle(title: string) {
     return this.change('title', title);
+  }
+
+  public changeDescription(description: string) {
+    return this.change('description', description);
   }
 
   public changeMeasures(measures: List<Measure>) {

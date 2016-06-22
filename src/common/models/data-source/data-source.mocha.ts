@@ -253,6 +253,7 @@ describe('DataSource', () => {
       expect(dataSource1.toJS()).to.deep.equal({
         "name": "wiki",
         "title": "Wiki",
+        "description": "",
         "engine": "druid",
         "source": "wiki",
         "refreshRule": {
@@ -345,6 +346,7 @@ describe('DataSource', () => {
       expect(dataSource2.toJS()).to.deep.equal({
         "name": "wiki",
         "title": "Wiki",
+        "description": "",
         "engine": "druid",
         "source": "wiki",
         "refreshRule": {
@@ -558,7 +560,8 @@ describe('DataSource', () => {
         "source": "wiki",
         "subsetFilter": null,
         "timeAttribute": "__time",
-        "title": "Wiki"
+        "title": "Wiki",
+        "description": ""
       });
     });
 
