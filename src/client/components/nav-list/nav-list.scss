@@ -68,6 +68,10 @@
 
       &:hover {
         background: rgba($brand, 0.12);
+
+        .icon svg path {
+          fill: $brand;
+        }
       }
     }
 
