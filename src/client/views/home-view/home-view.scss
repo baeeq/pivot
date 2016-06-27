@@ -6,16 +6,16 @@
   }
 
   .container {
-    @include unpin-top($header-height + 30px);
-    left: 50%;
-    transform: translate(-50%);
+    @include unpin-top($header-height + 40px);
+    left: 26%;
+    transform: translate(-18%);
 
     .datacubes {
       > .title {
         text-transform: uppercase;
         color: $brand;
-        margin-bottom: 20px;
-        font-size: 1.4em;
+        margin-bottom: 12px;
+        font-size: 16px;
       }
 
       .cubes-container {

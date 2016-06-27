@@ -36,20 +36,6 @@
     }
   }
 
-  .items {
-    .item {
-      .icon svg path {
-        fill: rgba($black, 0.26);
-      }
-
-      &.selected {
-        .icon svg path {
-          fill: $brand;
-        }
-      }
-    }
-  }
-
   .nav-logo {
     cursor: pointer;
   }
